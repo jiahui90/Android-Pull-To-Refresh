@@ -1,2 +1,11 @@
-A container for a list that you can pull to refresh.
-This uses a ListView embedded in a ScrollView.
+A container for a ListView that you can pull to refresh.
+
+Current Status: Buggy.
+There are two currently known bugs.
+1. When this view is first drawn, the list does not fill the container. This results in the entire header showing. Not so bad, but not great. Not something I would put in a publicly released app.
+2. Sometimes, the refresh header will show itself. Not sure why. This needs to be fixed.
+
+Background:
+It seems that there are two ways you can do this. One is to use a header in a ListView, and the other is to put a ListView and another View in a ScrollView. This uses the second method. An example of the first method can be found in Johan Nilsson's widget at https://github.com/johannilsson/android-pulltorefresh
+
+
