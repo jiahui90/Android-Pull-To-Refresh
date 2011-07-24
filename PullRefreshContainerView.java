@@ -21,7 +21,13 @@ import android.widget.TextView;
 /**
  * A container for a ListView that can be pulled to refresh.
  * This will create a ListView and refresh header automatically, but you can
- * set them using {@link #setList(ListView)} and {@link #setRefreshHeader(View, int)}
+ * customize them by using {@link #setList(ListView)} and {@link #setRefreshHeader(View, int)}
+ * <p>
+ * To use, put this where you would normally put your ListView. Since this does not extend
+ * ListView, you must use {@link #getList()} to modify the list or provide your own.
+ * <p>
+ * To get the actions of the list, use a {@link OnChangeStateListener} with {@link #setOnChangeStateListener(OnChangeStateListener)}.
+ * If you want to change how the refresh header looks, you should do it during these state changes.   
  */
 public class PullRefreshContainerView extends ScrollView {	
 	/**
