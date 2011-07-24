@@ -1,8 +1,9 @@
 /**
  * Use this however you want, but it might not work how you'd like.
  * If you fix it or make it better, share the wealth.
+ * If you find a problem, let it be known.
  * 
- * GitHub timahoney
+ * https://github.com/timahoney/Android-Pull-To-Refresh
  */
 package com.your.package;
 
@@ -18,9 +19,9 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 /**
- * A container for a list view and a view that you can pull to refresh.
- * This uses a default ListView and view for the header.
- * 
+ * A container for a ListView that can be pulled to refresh.
+ * This will create a ListView and refresh header automatically, but you can
+ * set them using {@link #setList(ListView)} and {@link #setRefreshHeader(View, int)}
  */
 public class PullRefreshContainerView extends ScrollView {	
 	/**
@@ -136,6 +137,9 @@ public class PullRefreshContainerView extends ScrollView {
 	@Override
 	public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+		
+		// We want the list to fill up the entire container.
+		// FIXME This does not yet work perfectly. When you first show this View, the ListView does not fill the container.
 		if (mList.getHeight() != getHeight()) {
 			mList.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, getHeight()));
 			mNeedScroll = true;
@@ -150,6 +154,9 @@ public class PullRefreshContainerView extends ScrollView {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 		
+		// If we were just measured, then we probably need to scroll away from the header view.
+		// FIXME This doesn't actually work as planned, but it somewhat works.
+		// There has to be a better way.
 		if (mNeedScroll) {
 			if (getScrollY() == mHeaderContainer.getBottom()) {
 				mNeedScroll = false;
